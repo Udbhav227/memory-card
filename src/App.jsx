@@ -25,7 +25,7 @@ const pageVariants = {
 const pageTransition = {
   type: "tween",
   ease: "anticipate",
-  duration: .5,
+  duration: .4,
 };
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
       <BackgroundVideo />
 
       <div className="app-container">
-        {gameState !== "home" && <Header />}
+        {gameState !== "home" && <Header onGoHome={goHome}/>}
         <main>
           <AnimatePresence mode="wait">
             {gameState === "home" && (
