@@ -1,9 +1,11 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion"; // Import motion and AnimatePresence
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion"; 
 import BackgroundVideo from "./components/BackgroundVideo";
 import Home from "./components/Home";
 import Game from "./components/Game";
 import Footer from "./components/Footer";
+import Header from "./components/Header"
 
 const pageVariants = {
   initial: {
@@ -39,6 +41,7 @@ function App() {
       <BackgroundVideo />
 
       <div className="app-container">
+        {gameState !== "home" && <Header />}
         <main>
           <AnimatePresence mode="wait">
             {gameState === "home" && (
