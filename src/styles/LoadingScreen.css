@@ -1,0 +1,20 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000315;
+  font-family: "Press Start 2P", system-ui;
+}
+
+.loading-text {
+  color: #fffbef;
+  font-size: 2rem;
+  text-shadow: 4px 4px 0px #3a2d27, 8px 8px 0px rgba(0, 0, 0, 0.5);
+  margin-top: 2rem;
+}
+
+.loading-container img {
+  max-width: 200px;
+}

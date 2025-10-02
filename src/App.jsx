@@ -1,11 +1,12 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion"; 
+import { motion, AnimatePresence } from "framer-motion";
 import BackgroundVideo from "./components/BackgroundVideo";
 import Home from "./components/Home";
 import Game from "./components/Game";
 import Footer from "./components/Footer";
-import Header from "./components/Header"
+import Header from "./components/Header";
+import LoadingScreen from "./components/LoadingScreen";
 
 const pageVariants = {
   initial: {
@@ -25,23 +26,31 @@ const pageVariants = {
 const pageTransition = {
   type: "tween",
   ease: "anticipate",
-  duration: .4,
+  duration: 0.4,
 };
 
 function App() {
   const [gameState, setGameState] = React.useState("home");
+  const [loading, setLoading] = React.useState(true);
 
-  const startGame = () => {
-    setGameState("playing");
-  };
+  React.useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, [loading]);
+
+  const startGame = () => setGameState("playing");
   const goHome = () => setGameState("home");
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
       <BackgroundVideo />
 
       <div className="app-container">
-        {gameState !== "home" && <Header onGoHome={goHome}/>}
+        {gameState !== "home" && <Header onGoHome={goHome} />}
         <main>
           <AnimatePresence mode="wait">
             {gameState === "home" && (
