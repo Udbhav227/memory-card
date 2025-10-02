@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
+  color: #fffbef;
   background-color: #000315;
   display: flex;
   flex-direction: column;
@@ -10,5 +11,4 @@ body {
 }
 .app-container {
   font-family: "Press Start 2P", system-ui;
-  color: white;
 }

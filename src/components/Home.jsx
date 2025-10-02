@@ -3,7 +3,7 @@ import '../styles/home.css'
 
 function Home( {onStartGame} ) {
   return (
-    <div className="container">
+    <div className="home-container">
       <h1 className="title">
         Gotta click
         <br />

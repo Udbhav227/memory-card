@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"; // Import motion and An
 import BackgroundVideo from "./components/BackgroundVideo";
 import Home from "./components/Home";
 import Game from "./components/Game";
+import Footer from "./components/Footer";
 
 const pageVariants = {
   initial: {
@@ -36,6 +37,7 @@ function App() {
   return (
     <>
       <BackgroundVideo />
+
       <div className="app-container">
         <main>
           <AnimatePresence mode="wait">
@@ -66,6 +68,7 @@ function App() {
             )}
           </AnimatePresence>
         </main>
+        <Footer />
       </div>
     </>
   );
