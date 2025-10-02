@@ -9,6 +9,14 @@
   align-items: center;
   box-sizing: border-box;
   z-index: 100;
+  transform: translateY(100%);
+  animation: slideInFromBottom 0.7s ease-out 0.5s forwards;
+}
+
+@keyframes slideInFromBottom {
+  to {
+    transform: translateY(0);
+  }
 }
 
 .footer-group {
@@ -89,9 +97,8 @@
 .footer-icon-button img.footer-icon {
   width: 32px;
   height: 32px;
-  transform: none; 
+  transform: none;
 }
-
 
 .footer-icon-button:hover {
   filter: brightness(1.1);
@@ -126,8 +133,13 @@
 }
 
 @keyframes floaty {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
 }
 
 @media (max-width: 600px) {
