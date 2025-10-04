@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import '../styles/LoadingScreen.css';
-import loadingAnimation1 from '../assets/videos/loading-screen1.gif';
-import loadingAnimation2 from '../assets/videos/loading-screen2.gif';
+import React, { useState } from "react";
+import "../styles/LoadingScreen.css";
+import loadingAnimation1 from "../assets/videos/loading-screen1.gif";
+import loadingAnimation2 from "../assets/videos/loading-screen2.gif";
 
 const LoadingScreen = () => {
   const animations = [loadingAnimation1, loadingAnimation2];
