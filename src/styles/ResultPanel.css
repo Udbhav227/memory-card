@@ -18,10 +18,11 @@
   max-width: 90vw;
   background: url("../assets/frame.png") no-repeat center;
   background-size: 100% 100%;
-  padding: 1rem;
+  padding: 1.25rem;
   image-rendering: pixelated;
   border-radius: 8px;
-box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .dialog-content-area {
@@ -63,20 +64,12 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px
   text-shadow: 2px 2px 0 #000;
 }
 
-.backdrop-out {
-  animation: backdrop-implode-out 0.8s forwards;
-}
-
-.dialog-out {
-  animation: dialog-pop-out 0.6s forwards;
-}
-
 @media (max-width: 600px) {
   .dialog-content-area {
     max-height: 36vh;
   }
   .dialog-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .dialog-score {
