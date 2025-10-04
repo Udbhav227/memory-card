@@ -7,22 +7,21 @@
   z-index: 1000;
   background: radial-gradient(
     circle at center,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(10, 10, 10, 0.95) 100%
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 20%,
+    rgba(0, 0, 0, 0.5) 100%
   );
-  animation: backdrop-implode-in 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .dialog-box-frame {
   width: 500px;
   max-width: 90vw;
-  background: url('../assets/frame.png') no-repeat center;
+  background: url("../assets/frame.png") no-repeat center;
   background-size: 100% 100%;
   padding: 1rem;
   image-rendering: pixelated;
   border-radius: 8px;
 }
-
 
 .dialog-content-area {
   display: flex;
