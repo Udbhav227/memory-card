@@ -21,6 +21,7 @@
   padding: 1rem;
   image-rendering: pixelated;
   border-radius: 8px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .dialog-content-area {
@@ -29,13 +30,13 @@
   justify-content: center;
   align-items: center;
 
-  height: 320px;
-  border-radius: 8px;
+  height: 300px;
+  border-radius: 10px;
   background: linear-gradient(to bottom, #262644, #1a1a30);
   padding: 3rem 0;
   text-align: center;
-  border: 2px solid #484868;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8), inset 0 0 0 2px #1a1a30;
+  border: 2px solid #000000;
+  box-shadow: 27px 20px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
 .dialog-title {
