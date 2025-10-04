@@ -1,5 +1,5 @@
 import PixelButton from '../components/PixelButton';
-import '../styles/home.css'
+import '../styles/Home.css'
 
 function Home( {onStartGame} ) {
   return (

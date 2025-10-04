@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/Header.css";
-import { header } from "framer-motion/client";
 
 const Header = ({ onGoHome }) => {
   const [score, setScore] = React.useState(0);
