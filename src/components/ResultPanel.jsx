@@ -1,5 +1,4 @@
 import React from "react";
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import PixelButton from "./PixelButton";
 import "../styles/ResultPanel.css";
