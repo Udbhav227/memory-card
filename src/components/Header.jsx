@@ -1,9 +1,7 @@
 import React from "react";
 import "../styles/Header.css";
 
-const Header = ({ onGoHome }) => {
-  const [score, setScore] = React.useState(0);
-  const [best, setBest] = React.useState(5);
+const Header = ({ onGoHome, score, bestScore }) => {
   const [scoreAnimating, setScoreAnimating] = React.useState(false);
   const [bestAnimating, setBestAnimating] = React.useState(false);
 
@@ -16,13 +14,12 @@ const Header = ({ onGoHome }) => {
   }, [score]);
 
   React.useEffect(() => {
-    if (score >= best) {
-      setBest(score);
+    if (score >= bestScore && score > 0) {
       setBestAnimating(true);
       const timeout = setTimeout(() => setBestAnimating(false), 250);
       return () => clearTimeout(timeout);
     }
-  }, [score, best]);
+  }, [score, bestScore]);
 
   return (
     <header className="header-container">
@@ -44,7 +41,7 @@ const Header = ({ onGoHome }) => {
         <h3>
           Best:{" "}
           <span className={`score ${bestAnimating ? "score-bump" : ""}`}>
-            {best}
+            {bestScore}
           </span>
         </h3>
       </div>

@@ -2,8 +2,8 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import BackgroundVideo from "./components/BackgroundVideo";
-import Home from "./components/Home";
-import Game from "./components/Game";
+import HomePage from "./pages/HomePage";
+import GamePage from "./pages/GamePage";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LoadingScreen from "./components/LoadingScreen";
@@ -30,15 +30,34 @@ const pageTransition = {
 };
 
 function App() {
-  const [gameState, setGameState] = React.useState("home");
   const [loading, setLoading] = React.useState(true);
+  const [gameState, setGameState] = React.useState("home");
+  const [difficulty, setDifficulty] = React.useState(null);
+  const [score, setScore] = React.useState(0);
+  const [bestScore, setBestScore] = React.useState(0);
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
-  }, [loading]);
+  }, []);
 
-  const startGame = () => setGameState("playing");
+  React.useEffect(() => {
+    if (score > bestScore) {
+      setBestScore(score);
+    }
+  }, [score, bestScore]);
+
+  const startGame = (selectedDifficulty) => {
+    setDifficulty(selectedDifficulty);
+    setGameState("playing");
+    setScore(0);
+    setBestScore(0);
+  };
+
+  const handlePlayAgain = () => {
+    setScore(0);
+  };
+
   const goHome = () => setGameState("home");
 
   if (loading) {
@@ -47,10 +66,12 @@ function App() {
 
   return (
     <>
-      <BackgroundVideo />
+      {/* <BackgroundVideo /> */}
 
       <div className="app-container">
-        {gameState !== "home" && <Header onGoHome={goHome} />}
+        {gameState !== "home" && (
+          <Header onGoHome={goHome} score={score} bestScore={bestScore} />
+        )}
         <main>
           <AnimatePresence mode="wait">
             {gameState === "home" && (
@@ -62,7 +83,7 @@ function App() {
                 variants={pageVariants}
                 transition={pageTransition}
               >
-                <Home onStartGame={startGame} />
+                <HomePage onStartGame={startGame} />
               </motion.div>
             )}
 
@@ -75,7 +96,13 @@ function App() {
                 variants={pageVariants}
                 transition={pageTransition}
               >
-                <Game onGoHome={goHome} />
+                <GamePage
+                  onGoHome={goHome}
+                  difficulty={difficulty}
+                  score={score}
+                  setScore={setScore}
+                  onPlayAgain={handlePlayAgain}
+                />
               </motion.div>
             )}
           </AnimatePresence>
