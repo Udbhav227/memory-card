@@ -1,3 +1,12 @@
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  /* min-height: calc(100vh - 180px); */
+}
+
 .playground {
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +17,8 @@
   margin: 0 auto;
   padding: 1rem;
   box-sizing: border-box;
+  max-height: calc(90vh - 200px);
+
 }
 
 .tilt-component {
@@ -20,7 +31,7 @@
   cursor: pointer;
   will-change: transform;
   background-color: transparent;
-  width: clamp(120px, 220px, 300px);
+  width: clamp(120px, 220px, 220px);
   aspect-ratio: 2.5 / 3.5;
   perspective: 1000px;
   flex-shrink: 0;
@@ -88,6 +99,23 @@
   object-fit: cover;
 }
 
+.rounds-info {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  position: fixed;
+  bottom: 10px;
+  right: 50;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); */
+}
+
+.rounds-count {
+  color: #ffcc00;
+  font-size: 1.1rem;
+}
+
 @media (max-width: 768px) {
   .playground {
     gap: 1rem;
@@ -103,5 +131,16 @@
 
   .playground.count-5 .flip-card {
     flex-basis: calc(33.333% - 1rem);
+  }
+
+  .rounds-info {
+    font-size: .75rem;
+    padding: 8px 16px;
+    bottom: unset;
+    top: 15%;
+  }
+
+  .rounds-count {
+    font-size: .8rem;
   }
 }

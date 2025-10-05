@@ -113,6 +113,14 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain, isSfxOn }) => 
         ))}
       </div>
 
+      {!gameOver && (
+        <div className="rounds-info">
+          <p>
+            Round: <span className="rounds-count">{score} / {currentMode.rounds}</span>
+          </p>
+        </div>
+      )}
+
       {gameOver && (
         <ResultPanel
           result={gameResult}
