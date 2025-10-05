@@ -1,17 +1,21 @@
-.card-section {
+.playground {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
   width: 100%;
+  max-width: 1500px;
   margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .flip-card {
   background-color: transparent;
-  width: clamp(110px, 15vw, 220px);
+  width: clamp(120px, 16vw, 300px);
   aspect-ratio: 2.5 / 3.5;
   perspective: 1000px;
+  flex-shrink: 0;
 }
 
 .flip-card-inner {
@@ -60,7 +64,7 @@
   box-sizing: border-box;
   text-align: center;
   color: white;
-  font-size: clamp(0.75rem, 2vw, 1rem);
+  font-size: clamp(0.5rem, 2vw, 1rem);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
@@ -77,8 +81,20 @@
   object-fit: cover;
 }
 
-@media (max-width: 600px) {
-  .card-section {
-    gap: 0.75rem;
+@media (max-width: 768px) {
+  .playground {
+    gap: 1rem;
+  }
+
+  .playground.count-3 .flip-card {
+    flex-basis: calc(33.333% - 1rem);
+  }
+
+  .playground.count-4 .flip-card {
+    flex-basis: calc(45% - 1rem);
+  }
+
+  .playground.count-5 .flip-card {
+    flex-basis: calc(33.333% - 1rem);
   }
 }
