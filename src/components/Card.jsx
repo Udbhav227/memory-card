@@ -18,6 +18,7 @@ const Card = ({ character, triggerFlip, handleCardClick }) => {
         transitionSpeed={1500}
         tiltMaxAngleX={15}
         tiltMaxAngleY={15}
+        gyroscope={true}
         glareBorderRadius="10px"
         className="tilt-component"
       >
