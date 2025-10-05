@@ -31,7 +31,7 @@ const dialogTransition = {
   duration: 0.4,
 };
 
-const ResultPanel = ({ result, score, handlePlayAgain, isVisible }) => {
+const ResultPanel = ({ result, score, handlePlayAgain, isVisible, isSfxOn }) => {
   const isWin = result === "win";
   const titleText = isWin ? "YOU WON!" : "YOU LOST!";
   const titleClassName = isWin ? "title-win" : "title-lost";
@@ -61,6 +61,7 @@ const ResultPanel = ({ result, score, handlePlayAgain, isVisible }) => {
               <p className="dialog-score">YOUR SCORE: {score}</p>
               <PixelButton
                 onClick={handlePlayAgain}
+                isSfxOn={isSfxOn}
                 style={{
                   "--button-color": "#e64539",
                   "--button-shadow-color": "#b82e24",

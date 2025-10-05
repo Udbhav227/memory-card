@@ -11,7 +11,7 @@ const Card = ({ character, triggerFlip, handleCardClick }) => {
     >
       <Tilt
         glareEnable={true}
-        glareMaxOpacity={0.6}
+        glareMaxOpacity={0.4}
         glareColor="#ffffff"
         glarePosition="bottom"
         scale={1.05}

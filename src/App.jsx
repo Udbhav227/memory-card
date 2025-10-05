@@ -35,7 +35,8 @@ function App() {
   const [difficulty, setDifficulty] = React.useState(null);
   const [score, setScore] = React.useState(0);
   const [bestScore, setBestScore] = React.useState(0);
-  const [gameKey, setGameKey] = React.useState(0); // 1. Add gameKey state
+  const [gameKey, setGameKey] = React.useState(0);
+  const [isSfxOn, setIsSfxOn] = React.useState(true);
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -83,12 +84,12 @@ function App() {
                 variants={pageVariants}
                 transition={pageTransition}
               >
-                <HomePage onStartGame={startGame} />
+                <HomePage onStartGame={startGame} isSfxOn={isSfxOn} />
               </motion.div>
             )}
             {gameState === "playing" && (
               <motion.div
-                key={gameKey} // 3. Use gameKey as the key
+                key={gameKey}
                 initial="initial"
                 animate="in"
                 exit="out"
@@ -100,12 +101,13 @@ function App() {
                   score={score}
                   setScore={setScore}
                   handlePlayAgain={handlePlayAgain}
+                  isSfxOn={isSfxOn}
                 />
               </motion.div>
             )}
           </AnimatePresence>
         </main>
-        <Footer />
+        <Footer isSfxOn={isSfxOn} setIsSfxOn={setIsSfxOn} />
       </div>
     </>
   );

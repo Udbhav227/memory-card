@@ -6,12 +6,12 @@ import MusicOffIconPath from "../assets/icons/music-note-slash-svgrepo-com.svg";
 import SfxOnIconPath from "../assets/icons/sound-on-svgrepo-com.svg";
 import SfxOffIconPath from "../assets/icons/sound-off-svgrepo-com.svg";
 import bgm from "../assets/sounds/Pokémon Opening - Gotta Catch 'Em All (Lofi Version).mp3";
+import clickSound from "../assets/sounds/click.mp3";
 
-const Footer = () => {
+const Footer = ({ isSfxOn, setIsSfxOn }) => {
   const [isMusicOn, setIsMusicOn] = React.useState(false);
-  const [isSfxOn, setIsSfxOn] = React.useState(true);
-
   const audioRef = React.useRef(null);
+  const clickAudioRef = React.useRef(null);
 
   React.useEffect(() => {
     if (!audioRef.current) {
@@ -19,7 +19,16 @@ const Footer = () => {
       audioRef.current.loop = true;
       audioRef.current.volume = 0.5;
     }
+    if (!clickAudioRef.current) {
+      clickAudioRef.current = new Audio(clickSound);
+    }
   }, []);
+
+  const playClickSound = () => {
+    if (isSfxOn && clickAudioRef.current) {
+      clickAudioRef.current.play();
+    }
+  };
 
   React.useEffect(() => {
     if (audioRef.current) {
@@ -39,9 +48,18 @@ const Footer = () => {
     };
   }, [isMusicOn]);
 
-  const handleMusic = () => setIsMusicOn((prev) => !prev);
-  const handleSfx = () => setIsSfxOn((prev) => !prev);
-  const handleShowRules = () => console.log("Show Rules Modal");
+  const handleMusic = () => {
+    playClickSound();
+    setIsMusicOn((prev) => !prev);
+  };
+  const handleSfx = () => {
+    playClickSound();
+    setIsSfxOn((prev) => !prev);
+  };
+  const handleShowRules = () => {
+    playClickSound();
+    console.log("Show Rules Modal");
+  };
 
   return (
     <footer className="footer-container">

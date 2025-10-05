@@ -3,6 +3,7 @@ import ResultPanel from "../components/ResultPanel";
 import Card from "../components/Card";
 import gameModes from "../gameMode";
 import initialCharacters from "../Characters";
+import flipSound from "../assets/sounds/flip.mp3";
 
 // Fisher-Yates shuffle
 const shuffleArray = (array) => {
@@ -14,7 +15,7 @@ const shuffleArray = (array) => {
   return newArray;
 };
 
-const GamePage = ({ difficulty, score, setScore, handlePlayAgain }) => {
+const GamePage = ({ difficulty, score, setScore, handlePlayAgain, isSfxOn }) => {
   const [characters, setCharacters] = useState(
     initialCharacters.map((c) => ({ ...c, clicked: false }))
   );
@@ -22,8 +23,21 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain }) => {
   const [isShuffling, setIsShuffling] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameResult, setGameResult] = useState("");
+  const flipAudioRef = React.useRef(null);
 
   const currentMode = gameModes[difficulty];
+
+  useEffect(() => {
+    if (!flipAudioRef.current) {
+      flipAudioRef.current = new Audio(flipSound);
+    }
+  }, []);
+
+  const playFlipSound = () => {
+    if (isSfxOn && flipAudioRef.current) {
+      flipAudioRef.current.play();
+    }
+  };
 
   // Effect to draw cards when the component mounts
   useEffect(() => {
@@ -31,6 +45,7 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain }) => {
     setGameResult("")
     const initialSet = shuffleArray(characters).slice(0, currentMode.cards);
     setIsShuffling(true);
+    playFlipSound();
     setPlayingCards(initialSet);
     setTimeout(() => setIsShuffling(false), 300);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,6 +65,7 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain }) => {
     }
 
     setIsShuffling(true);
+    playFlipSound();
 
     setTimeout(() => {
       const newScore = score + 1;
@@ -103,6 +119,7 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain }) => {
           score={score}
           isVisible={gameOver}
           handlePlayAgain={handlePlayAgain}
+          isSfxOn={isSfxOn}
         />
       )}
     </div>
