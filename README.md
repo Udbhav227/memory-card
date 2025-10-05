@@ -6,7 +6,7 @@ A classic memory/click game implemented with React and Vite. The objective is to
 
 Experience the game live here:
 
-[Play the Game Here](link)
+[Play the Game Here](https://gotta-click-em-all.netlify.app/)
 
 ## ✨ Features
 
