@@ -1,0 +1,99 @@
+:root {
+  --enter-duration: 400ms;
+  --exit-duration: 350ms;
+}
+
+.game-rules-root {
+  position: fixed;
+  bottom: 20px;
+  right: 8%;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.game-rules-root.entering,
+.game-rules-root.entered {
+  pointer-events: auto;
+}
+
+.rules-box {
+  font-family: cursive;
+  background: linear-gradient(135deg, #283e51, #485563);
+  border: 1px solid #6ea0ff;
+  color: #f8faff;
+  padding: 14px 18px;
+  margin-bottom: 50px;
+  margin-right: -40px;
+  border-radius: 10px;
+  max-width: 340px;
+  font-size: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform var(--enter-duration) ease-out,
+    opacity var(--enter-duration) ease-out;
+}
+
+ul {
+  padding: 0;
+  padding-left: 1rem;
+}
+
+.rules-box.entering,
+.rules-box.entered {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rules-box.exiting {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform var(--exit-duration) ease-in,
+    opacity var(--exit-duration) ease-in;
+}
+
+.psyduck {
+  width: 96px;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform var(--enter-duration) ease-out,
+    opacity var(--enter-duration) ease-out;
+}
+
+.psyduck.entering,
+.psyduck.entered {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.psyduck.exiting {
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform var(--exit-duration) ease-in,
+    opacity var(--exit-duration) ease-in;
+}
+
+.psy-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+  .game-rules-root {
+    right: 20%;
+    bottom: 14px;
+  }
+  .rules-box {
+    font-size: .75rem;
+    max-width: 260px;
+    padding: 10px 12px;
+    margin-bottom: 60px;
+  }
+  .psyduck {
+    width: 72px;
+  }
+}
