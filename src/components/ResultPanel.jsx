@@ -1,4 +1,5 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import PixelButton from "./PixelButton";
 import "../styles/ResultPanel.css";
@@ -30,7 +31,7 @@ const dialogTransition = {
   duration: 0.4,
 };
 
-const ResultPanel = ({ result, score, onPlayAgain, isVisible }) => {
+const ResultPanel = ({ result, score, handlePlayAgain, isVisible }) => {
   const isWin = result === "win";
   const titleText = isWin ? "YOU WON!" : "YOU LOST!";
   const titleClassName = isWin ? "title-win" : "title-lost";
@@ -59,7 +60,7 @@ const ResultPanel = ({ result, score, onPlayAgain, isVisible }) => {
               <h2 className={`dialog-title ${titleClassName}`}>{titleText}</h2>
               <p className="dialog-score">YOUR SCORE: {score}</p>
               <PixelButton
-                onClick={onPlayAgain}
+                onClick={handlePlayAgain}
                 style={{
                   "--button-color": "#e64539",
                   "--button-shadow-color": "#b82e24",

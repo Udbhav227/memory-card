@@ -35,6 +35,7 @@ function App() {
   const [difficulty, setDifficulty] = React.useState(null);
   const [score, setScore] = React.useState(0);
   const [bestScore, setBestScore] = React.useState(0);
+  const [gameKey, setGameKey] = React.useState(0); // 1. Add gameKey state
 
   React.useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -49,16 +50,16 @@ function App() {
 
   const startGame = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty);
+    setScore(0);
     setGameState("playing");
-    setScore(0);
-    setBestScore(0);
-  };
-
-  const handlePlayAgain = () => {
-    setScore(0);
+    setGameKey((prevKey) => prevKey + 1);
   };
 
   const goHome = () => setGameState("home");
+
+  const handlePlayAgain = () => {
+    startGame(difficulty);
+  };
 
   if (loading) {
     return <LoadingScreen />;
@@ -66,8 +67,7 @@ function App() {
 
   return (
     <>
-      {/* <BackgroundVideo /> */}
-
+      <BackgroundVideo />
       <div className="app-container">
         {gameState !== "home" && (
           <Header onGoHome={goHome} score={score} bestScore={bestScore} />
@@ -86,10 +86,9 @@ function App() {
                 <HomePage onStartGame={startGame} />
               </motion.div>
             )}
-
             {gameState === "playing" && (
               <motion.div
-                key="playing"
+                key={gameKey} // 3. Use gameKey as the key
                 initial="initial"
                 animate="in"
                 exit="out"
@@ -97,11 +96,10 @@ function App() {
                 transition={pageTransition}
               >
                 <GamePage
-                  onGoHome={goHome}
                   difficulty={difficulty}
                   score={score}
                   setScore={setScore}
-                  onPlayAgain={handlePlayAgain}
+                  handlePlayAgain={handlePlayAgain}
                 />
               </motion.div>
             )}
