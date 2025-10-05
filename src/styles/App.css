@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-body {
+body, #root {
   color: #fffbef;
   background-color: #000315;
   display: flex;

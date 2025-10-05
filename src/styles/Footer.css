@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 12px 24px;
+  padding: .5rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,8 +43,8 @@
 }
 
 .footer-icon-button img.footer-icon {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   transform: translateY(-10%);
 }
 
@@ -81,12 +81,13 @@
   border: 2px solid var(--button-shadow-color);
   border-radius: 50%;
   will-change: transform;
+  padding: 5px;
 
   color: #fffbef;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
-  height: 50px;
-  width: 50px;
+  height: 44px;
+  width: 44px;
   box-sizing: border-box;
   background-color: var(--button-color);
 
