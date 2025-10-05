@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem;
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
@@ -13,18 +13,14 @@
 .tilt-component {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
-  overflow: hidden;
+  transform-style: preserve-3d;
 }
 
 .flip-card {
-  cursor: pointer; /* This is a good addition for user experience */
-}
-
-.flip-card {
+  cursor: pointer;
   will-change: transform;
   background-color: transparent;
-  width: clamp(120px, 16vw, 300px);
+  width: clamp(120px, 220px, 300px);
   aspect-ratio: 2.5 / 3.5;
   perspective: 1000px;
   flex-shrink: 0;
@@ -44,7 +40,6 @@
   transform: rotateY(180deg);
 }
 
-
 .flip-card-front,
 .flip-card-back {
   position: absolute;
@@ -58,7 +53,7 @@
 }
 
 .flip-card-front {
-  background-color: #bbb;
+  background-color: aqua;
 }
 
 .flip-card-front img {
@@ -78,8 +73,8 @@
   color: white;
   font-size: clamp(0.5rem, 2vw, 1rem);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  pointer-events: none;
 }
 
 .flip-card-back {
