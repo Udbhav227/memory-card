@@ -3,17 +3,13 @@ import "../styles/PixelButton.css";
 import clickSound from "../assets/sounds/click.mp3";
 
 const PixelButton = ({ onClick, children, isSfxOn, ...props }) => {
-  const audioRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(clickSound);
-    }
-  }, []);
+  const audioRef = React.useRef(new Audio(clickSound));
 
   const handleClick = (e) => {
     if (isSfxOn && audioRef.current) {
-      audioRef.current.play();
+      const audioClone = audioRef.current.cloneNode();
+      audioClone.currentTime = 0;
+      audioClone.play();
     }
     if (onClick) {
       onClick(e);
