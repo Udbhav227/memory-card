@@ -15,7 +15,13 @@ const shuffleArray = (array) => {
   return newArray;
 };
 
-const GamePage = ({ difficulty, score, setScore, handlePlayAgain, isSfxOn }) => {
+const GamePage = ({
+  difficulty,
+  score,
+  setScore,
+  handlePlayAgain,
+  isSfxOn,
+}) => {
   const [characters, setCharacters] = useState(
     initialCharacters.map((c) => ({ ...c, clicked: false }))
   );
@@ -42,13 +48,13 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain, isSfxOn }) => 
   // Effect to draw cards when the component mounts
   useEffect(() => {
     setGameOver(false);
-    setGameResult("")
+    setGameResult("");
     const initialSet = shuffleArray(characters).slice(0, currentMode.cards);
     setIsShuffling(true);
     playFlipSound();
     setPlayingCards(initialSet);
     setTimeout(() => setIsShuffling(false), 300);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handling win/loose logic
@@ -74,18 +80,45 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain, isSfxOn }) => 
       const updatedCharacters = characters.map((char) =>
         char.id === clickedCard.id ? { ...char, clicked: true } : char
       );
-      setCharacters(updatedCharacters);
 
       if (newScore === currentMode.rounds) {
+        setCharacters(updatedCharacters);
         handleEndGame("win");
         return;
       }
 
-      const nextCards = shuffleArray(updatedCharacters).slice(
-        0,
-        currentMode.cards
-      );
+      const unclickedCharacters = updatedCharacters.filter((c) => !c.clicked);
+      const clickedCharacters = updatedCharacters.filter((c) => c.clicked);
 
+      let nextCards = [];
+
+      if (unclickedCharacters.length > 0) {
+        const randomIndex = Math.floor(
+          Math.random() * unclickedCharacters.length
+        );
+        const guaranteedUnclickedCard = unclickedCharacters[randomIndex];
+        nextCards.push(guaranteedUnclickedCard);
+
+        const cardsToDraw = currentMode.cards - 1;
+
+        const allOtherCharacters = [
+          ...unclickedCharacters.filter(
+            (c) => c.id !== guaranteedUnclickedCard.id
+          ),
+          ...clickedCharacters,
+        ];
+
+        const shuffledRemaining = shuffleArray(allOtherCharacters).slice(
+          0,
+          cardsToDraw
+        );
+
+        nextCards = shuffleArray([...nextCards, ...shuffledRemaining]);
+      } else {
+        nextCards = shuffleArray(updatedCharacters).slice(0, currentMode.cards);
+      }
+
+      setCharacters(updatedCharacters);
       setPlayingCards(nextCards);
 
       setTimeout(() => {
@@ -116,7 +149,10 @@ const GamePage = ({ difficulty, score, setScore, handlePlayAgain, isSfxOn }) => 
       {!gameOver && (
         <div className="rounds-info">
           <p>
-            Round: <span className="rounds-count">{score} / {currentMode.rounds}</span>
+            Round:{" "}
+            <span className="rounds-count">
+              {score} / {currentMode.rounds}
+            </span>
           </p>
         </div>
       )}
