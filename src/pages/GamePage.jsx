@@ -29,15 +29,19 @@ const GamePage = ({
   const [isShuffling, setIsShuffling] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameResult, setGameResult] = useState("");
-
-  const flipAudioRef = React.useRef(new Audio(flipSound));
+  const flipAudioRef = React.useRef(null);
 
   const currentMode = gameModes[difficulty];
 
+  useEffect(() => {
+    if (!flipAudioRef.current) {
+      flipAudioRef.current = new Audio(flipSound);
+    }
+  }, []);
+
   const playFlipSound = () => {
     if (isSfxOn && flipAudioRef.current) {
-      const audioClone = flipAudioRef.current.cloneNode();
-      audioClone.play();
+      flipAudioRef.current.play();
     }
   };
 

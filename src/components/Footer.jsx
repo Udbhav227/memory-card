@@ -6,25 +6,31 @@ import SfxOnIconPath from "../assets/icons/sound-on-svgrepo-com.svg";
 import SfxOffIconPath from "../assets/icons/sound-off-svgrepo-com.svg";
 import bgm from "../assets/sounds/Pokémon Opening - Gotta Catch 'Em All (Lofi Version).mp3";
 import clickSound from "../assets/sounds/click.mp3";
-import GameRulesPopup from "./Rules";
+import GameRulesPopup from "./Rules"; 
 
 const Footer = ({ isSfxOn, setIsSfxOn }) => {
   const [isMusicOn, setIsMusicOn] = React.useState(false);
-  const [showRules, setShowRules] = React.useState(false);
-
-  const audioRef = React.useRef(new Audio(bgm));
-  const clickAudioRef = React.useRef(new Audio(clickSound));
+  const [showRules, setShowRules] = React.useState(false); 
+  
+  const audioRef = React.useRef(null);
+  const clickAudioRef = React.useRef(null);
 
   React.useEffect(() => {
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.5;
+    if (!audioRef.current) {
+      audioRef.current = new Audio(bgm);
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.5;
+    }
+    if (!clickAudioRef.current) {
+      clickAudioRef.current = new Audio(clickSound);
+    }
   }, []);
 
   const playClickSound = () => {
     if (isSfxOn && clickAudioRef.current) {
-      const audioClone = clickAudioRef.current.cloneNode();
-      audioClone.currentTime = 0;
-      audioClone.play();
+      // Must load/reload to play again if it finished
+      clickAudioRef.current.currentTime = 0; 
+      clickAudioRef.current.play();
     }
   };
 
@@ -50,12 +56,12 @@ const Footer = ({ isSfxOn, setIsSfxOn }) => {
     playClickSound();
     setIsMusicOn((prev) => !prev);
   };
-
+  
   const handleSfx = () => {
     playClickSound();
     setIsSfxOn((prev) => !prev);
   };
-
+  
   // UPDATED: Function to toggle the rules popup
   const handleShowRules = () => {
     playClickSound();
@@ -65,11 +71,12 @@ const Footer = ({ isSfxOn, setIsSfxOn }) => {
   return (
     <>
       {/* 1. The Rules Popup Component */}
-      <GameRulesPopup
-        isVisible={showRules}
-        onClickButton={() => setShowRules(false)}
+      <GameRulesPopup 
+        isVisible={showRules} 
+        onClickButton={() => setShowRules(false)} // Pass a function to close it
       />
-
+      
+      {/* 2. The Original Footer Content */}
       <footer className="footer-container">
         <div className="footer-group">
           <button
@@ -107,7 +114,8 @@ const Footer = ({ isSfxOn, setIsSfxOn }) => {
 
         <div className="footer-group">
           <button
-            className={`footer-icon-button ${showRules ? "active" : ""}`}
+            // Add 'active' class to keep the button visually pressed while rules are shown
+            className={`footer-icon-button ${showRules ? "active" : ""}`} 
             onClick={handleShowRules}
             aria-label="How to Play"
           >
